@@ -4,18 +4,18 @@ import { diff } from 'jest-diff';
 const reset = async (page: Page) => {
   await page.evaluate(() => {
     (window as any).__PREACT_PERFMETRICS__ = {
-      renders: [],
-      commits: [],
-      unmounts: [],
+      elementsRendered: [],
+      renderPhases: [],
+      elementsUnmounted: [],
     };
   });
 };
 const counters = async (page: Page) => await page.evaluate('window.__PREACT_PERFMETRICS__');
 
 interface Counters {
-  renders?: number;
-  commits?: number;
-  unmounts?: number;
+  elementsRendered?: number;
+  renderPhases?: number;
+  elementsUnmounted?: number;
 }
 const equals = (a: any, b: any) => Object.keys(a).every((key) => a[key] === b[key]);
 
@@ -25,8 +25,8 @@ const extension = {
       throw Error("You need to call `toPerformance` from a playwright's `page` object");
     }
     const counts = (await counters(page)) as Counters;
-    const pass = equals(expected, counts.renders);
-    const messageStr = diff(expected, counts.renders);
+    const pass = equals(expected, counts.elementsRendered);
+    const messageStr = diff(expected, counts.elementsRendered);
 
     return {
       message: () => messageStr,

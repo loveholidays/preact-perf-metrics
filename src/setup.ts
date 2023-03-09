@@ -2,9 +2,9 @@ import { options, Fragment } from 'preact';
 
 const reset = () => {
   (window as any).__PREACT_PERFMETRICS__ = {
-    renders: [],
-    commits: [],
-    unmounts: [],
+    elementsRendered: [],
+    renderPhases: [],
+    elementsUnmounted: [],
   };
 };
 
@@ -32,16 +32,16 @@ const setup = () => {
 
   reset();
   o.__r = (vnode: any) => {
-    w.__PREACT_PERFMETRICS__.renders.push(displayName(vnode));
+    w.__PREACT_PERFMETRICS__.elementsRendered.push(displayName(vnode));
     render(vnode);
   };
   o.__c = (vnode: any, commitQueue: any) => {
-    w.__PREACT_PERFMETRICS__.commits.push(displayName(vnode));
+    w.__PREACT_PERFMETRICS__.renderPhases.push(displayName(vnode));
     commit(vnode, commitQueue);
   };
 
   o.unmount = (vnode: any) => {
-    w.__PREACT_PERFMETRICS__.unmounts.push(displayName(vnode));
+    w.__PREACT_PERFMETRICS__.elementsUnmounted.push(displayName(vnode));
     unmount(vnode);
   };
 };
