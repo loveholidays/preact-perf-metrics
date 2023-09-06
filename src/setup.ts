@@ -1,10 +1,24 @@
 import { options, Fragment } from 'preact';
 
 const reset = () => {
-  (window as any).__PREACT_PERFMETRICS__ = {
+  const w = window as any;
+  w.__PREACT_PERFMETRICS__ = {
     elementsRendered: [],
     renderPhases: [],
     elementsUnmounted: [],
+    lastInteraction: performance.now(),
+    waitForInteractionsFinished: () => {
+      return new Promise<void>((resolve) => {
+        function check() {
+          if (performance.now() - w.__PREACT_PERFMETRICS__.lastInteraction > 1500) {
+            resolve();
+          } else {
+            setTimeout(check, 500);
+          }
+        }
+        check();
+      });
+    }
   };
 };
 
@@ -33,15 +47,18 @@ const setup = () => {
   reset();
   o.__r = (vnode: any) => {
     w.__PREACT_PERFMETRICS__.elementsRendered.push(displayName(vnode));
+    w.__PREACT_PERFMETRICS__.lastInteraction = performance.now();
     render(vnode);
   };
   o.__c = (vnode: any, commitQueue: any) => {
     w.__PREACT_PERFMETRICS__.renderPhases.push(displayName(vnode));
+    w.__PREACT_PERFMETRICS__.lastInteraction = performance.now();
     commit(vnode, commitQueue);
   };
 
   o.unmount = (vnode: any) => {
     w.__PREACT_PERFMETRICS__.elementsUnmounted.push(displayName(vnode));
+    w.__PREACT_PERFMETRICS__.lastInteraction = performance.now();
     unmount(vnode);
   };
 };

@@ -2,15 +2,32 @@ import type { Page } from '@playwright/test';
 import { diff } from 'jest-diff';
 
 const reset = async (page: Page) => {
+  await settle(page);
   await page.evaluate(() => {
-    (window as any).__PREACT_PERFMETRICS__ = {
+    const w = window as any;
+    w.__PREACT_PERFMETRICS__ = {
       elementsRendered: [],
       renderPhases: [],
       elementsUnmounted: [],
+      lastInteraction: performance.now(),
+      waitForInteractionsFinished: () => {
+        return new Promise<void>((resolve) => {
+          function check() {
+            if (performance.now() - w.__PREACT_PERFMETRICS__.lastInteraction > 1500) {
+              resolve();
+            } else {
+              setTimeout(check, 500);
+            }
+          }
+          check();
+        });
+      }
     };
   });
 };
+
 const counters = async (page: Page) => await page.evaluate('window.__PREACT_PERFMETRICS__');
+const settle = async (page: Page) => await page.evaluate('window.__PREACT_PERFMETRICS__.waitForInteractionsFinished()');
 
 interface Counters {
   elementsRendered?: number;
@@ -24,6 +41,7 @@ const extension = {
     if (!page.evaluate) {
       throw Error("You need to call `toPerformance` from a playwright's `page` object");
     }
+    await settle(page);
     const counts = (await counters(page)) as Counters;
     const pass = equals(expected, counts.elementsRendered);
     const messageStr = diff(expected, counts.elementsRendered);
@@ -37,6 +55,7 @@ const extension = {
     if (!page.evaluate) {
       throw Error("You need to call `toPerformance` from a playwright's `page` object");
     }
+    await settle(page);
     const counts = (await counters(page)) as Counters;
     const countersN = {} as Counters;
 
