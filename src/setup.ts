@@ -8,7 +8,7 @@ const reset = () => {
     elementsUnmounted: [],
     lastInteraction: performance.now(),
     waitForInteractionsFinished: () => {
-      return new Promise<void>((resolve) => {
+      return new Promise<void>((resolve: any) => {
         function check() {
           if (performance.now() - w.__PREACT_PERFMETRICS__.lastInteraction > 1500) {
             resolve();

@@ -1,0 +1,47 @@
+:root {
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
+
+	color: #222;
+	background-color: #fcfcfc;
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	margin: 0;
+	display: flex;
+	align-items: center;
+	min-height: 100vh;
+}
+
+p {
+	margin: 0;
+}
+
+#app {
+	max-width: 1280px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+button {
+	text-transform: uppercase;
+	padding: 0.5em 1em;
+	border-radius: 0.25em;
+	background-color: #AA6666;
+	color: #222;
+}
+
+.counter {
+	background-color: #aaa;
+	border: 2px solid #222;
+	border-radius: 10px;
+	margin: 1em;
+	padding: 0.5em 1em;
+}
