@@ -45,3 +45,14 @@ button {
 	margin: 1em;
 	padding: 0.5em 1em;
 }
+
+.list-item {
+	padding: 0.5em 1em;
+	border-bottom: 1px solid #ccc;
+}
+.selected {
+	background-color: #959;
+}
+.custom {
+	font-weight: bold;
+}
