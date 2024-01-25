@@ -3,8 +3,8 @@
 	line-height: 1.5;
 	font-weight: 400;
 
-	color: #222;
-	background-color: #fcfcfc;
+	color: #F6F7EB;
+	background-color: #393E41;
 
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
@@ -18,6 +18,9 @@ body {
 	display: flex;
 	align-items: center;
 	min-height: 100vh;
+}
+a {
+	color:#FFA630;
 }
 
 p {
@@ -34,13 +37,12 @@ button {
 	text-transform: uppercase;
 	padding: 0.5em 1em;
 	border-radius: 0.25em;
-	background-color: #AA6666;
-	color: #222;
+	background-color: #E94F37;
+	margin-bottom: 1em;
 }
 
-.counter {
-	background-color: #aaa;
-	border: 2px solid #222;
+.example {
+	border: 2px solid #FFA630;
 	border-radius: 10px;
 	margin: 1em;
 	padding: 0.5em 1em;
@@ -48,11 +50,10 @@ button {
 
 .list-item {
 	padding: 0.5em 1em;
-	border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid #F6F7EB
 }
+ 
 .selected {
-	background-color: #959;
-}
-.custom {
-	font-weight: bold;
+	background-color:#FFA630;
+	color: #393E41;
 }

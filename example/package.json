@@ -10,7 +10,8 @@
 	"dependencies": {
 		"@loveholidays/preact-perf-metrics": "file:..",
 		"@playwright/test": "^1.40.1",
-		"preact": "^10.13.1"
+		"preact": "^10.13.1",
+		"preact-router": "^4.1.2"
 	},
 	"devDependencies": {
 		"@preact/preset-vite": "^2.5.0",
