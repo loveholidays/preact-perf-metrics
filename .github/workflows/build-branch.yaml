@@ -21,6 +21,9 @@ jobs:
       - run: npm run lint
       - run: npm run build
 
+      - name: debugging thing
+        working-directory: ./example
+        run: ls -la .. && echo "-----" && ls -la ../lib
       - name: Example Setup
         working-directory: ./example
         run: npm install && npx playwright install && npm run build
