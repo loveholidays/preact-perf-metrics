@@ -3,7 +3,7 @@ import { Router } from 'preact-router';
 
 import './style.css';
 
-import { setup } from '@loveholidays/preact-perf-metrics/lib/setup';
+import { setup } from '@loveholidays/preact-perf-metrics';
 
 
 import { Counter1, Counter2, Counter3, Counter4, Counter5 } from './Counter';
