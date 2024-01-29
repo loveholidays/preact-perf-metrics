@@ -5,10 +5,8 @@ const RUNNING_URL = 'http://localhost:5173/counters';
 
 test.describe('Counters', () => {
   test.describe('Elements Rendered', () => {
-    test.beforeEach(async ({ page }) => {
-      await page.goto(RUNNING_URL);
-    });
     test('Counter-1 - Memoed button + inline callback', async ({ page }) => {
+      await page.goto(RUNNING_URL);
       await reset(page);
       await page.getByText('Counter-1: 0').waitFor();
       await page.getByRole('button', { name: 'Counter-1' }).click();
@@ -17,6 +15,7 @@ test.describe('Counters', () => {
     });
 
     test('Counter-2 - Memoed button + useCallback callback', async ({ page }) => {
+      await page.goto(RUNNING_URL);
       await reset(page);
       await page.getByText('Counter-2: 0').waitFor();
       await page.getByRole('button', { name: 'Counter-2' }).click();
@@ -26,10 +25,8 @@ test.describe('Counters', () => {
   });
 
   test.describe('Render Phases', () => {
-    test.beforeEach(async ({ page }) => {
-      await page.goto(RUNNING_URL);
-    });
     test('Counter-3 - multiples updates in the same event-loop', async ({ page }) => {
+      await page.goto(RUNNING_URL);
       await reset(page);
       await page.getByText('Counter-3: 0 and 0').waitFor();
       await page.getByRole('button', { name: 'Counter-3' }).click();
@@ -37,6 +34,7 @@ test.describe('Counters', () => {
       await expect(page).toPerform({ renderPhases: 1 });
     });
     test('Counter-4 - multiple updates in diffeernt event-loops', async ({ page }) => {
+      await page.goto(RUNNING_URL);
       await reset(page);
       await page.getByText('Counter-4: 0 and 0').waitFor();
       await page.getByRole('button', { name: 'Counter-4' }).click();
@@ -45,10 +43,8 @@ test.describe('Counters', () => {
     });
   });
   test.describe('Unmountings', () => {
-    test.beforeEach(async ({ page }) => {
-      await page.goto(RUNNING_URL);
-    });
     test('Counter-2 - No extra mounting/unmounting', async ({ page }) => {
+      await page.goto(RUNNING_URL);
       await reset(page);
       await page.getByText('Counter-2: 0').waitFor();
       await page.getByRole('button', { name: 'Counter-2' }).click();
@@ -57,6 +53,7 @@ test.describe('Counters', () => {
       await expect(page).toPerform({ elementsUnmounted: 0 });
     });
     test('Counter-5 - Conditional mounting/unmounting', async ({ page }) => {
+      await page.goto(RUNNING_URL);
       await reset(page);
       await page.getByText('Counter-5: 0').waitFor();
       await page.getByRole('button', { name: 'Counter-5' }).click();
@@ -67,10 +64,8 @@ test.describe('Counters', () => {
   });
 
   test.describe('Elements Rerendered', () => {
-    test.beforeEach(async ({ page }) => {
-      await page.goto(RUNNING_URL);
-    });
     test('Counter-2 - Memoed Button + useCallback callback', async ({ page }) => {
+      await page.goto(RUNNING_URL);
       await reset(page);
       await page.getByText('Counter-2: 0').waitFor();
       await page.getByRole('button', { name: 'Counter-2' }).click();
@@ -79,6 +74,7 @@ test.describe('Counters', () => {
       await expect(page).toPerform({ elementsRendered: 1, elementsUnmounted: 0, renderPhases: 1 });
     });
     test('Counter-1 - Memoed Button + inline callback', async ({ page }) => {
+      await page.goto(RUNNING_URL);
       await reset(page);
       await page.getByText('Counter-1: 0').waitFor();
       await page.getByRole('button', { name: 'Counter-1' }).click();
