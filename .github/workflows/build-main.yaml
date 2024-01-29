@@ -23,6 +23,20 @@ jobs:
           node-version: 18
       - run: npm install
 
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+      - name: Integration Test Setup
+        working-directory: ./example
+        run: npm install && npx playwright install
+
+      - name: Integration Test Run
+        working-directory: ./example
+        run: npm run test:perf:ci
+      
       # Sets HAS_CHANGESETS output to "false" when there are no changesets available, so we can skip
       # building and publishing when there were only documentation changes etc.
       - name: Check changesets
@@ -35,23 +49,6 @@ jobs:
           rm -rf status.json
           echo "::set-output name=HAS_CHANGESETS::$HAS_CHANGESETS"
 
-
-      - name: Lint
-        if: steps.changesets.outputs.HAS_CHANGESETS == 'true'
-        run: npm run lint
-
-      - name: Build
-        if: steps.changesets.outputs.HAS_CHANGESETS == 'true'
-        run: npm run build
-
-      - name: Integration Test Setup
-        working-directory: ./example
-        run: npm install && npx playwright install
-
-      - name: Integration Test Run
-        working-directory: ./example
-        run: npm run test:perf:ci
-      
       - name: Update package versions
         if: steps.changesets.outputs.HAS_CHANGESETS == 'true'
         run: |
