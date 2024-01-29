@@ -44,11 +44,13 @@ jobs:
         if: steps.changesets.outputs.HAS_CHANGESETS == 'true'
         run: npm run build
 
-      - name: Integration Tests
-        if: steps.changesets.outputs.HAS_CHANGESETS == 'true'
+      - name: Integration Test Setup
         working-directory: ./example
-        run: npm install && npm run dev &
-      - run: npm run test:perf
+        run: npm install && npx playwright install
+
+      - name: Integration Test Run
+        working-directory: ./example
+        run: npm run test:perf:ci
       
       - name: Update package versions
         if: steps.changesets.outputs.HAS_CHANGESETS == 'true'

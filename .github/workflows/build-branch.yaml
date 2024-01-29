@@ -13,17 +13,20 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
+  
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
+
       - run: npm install
       - run: npm run lint
       - run: npm run build
 
-      - name: Example Setup
+      - name: Perf Test Setup
         working-directory: ./example
-        run: npm install && npx playwright install && npm run build
+        run: npm install && npx playwright install
+
       - name: Perf Test Run
         working-directory: ./example
         run: npm run test:perf:ci
