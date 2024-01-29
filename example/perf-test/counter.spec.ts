@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { reset } from '@loveholidays/preact-perf-metrics';
 
-const RUNNING_URL = 'http://localhost:4173/counters';
+const RUNNING_URL = 'http://localhost:5173/counters';
 
 test.describe('Counters', () => {
   test.describe('Elements Rendered', () => {
