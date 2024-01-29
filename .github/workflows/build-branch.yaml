@@ -21,9 +21,9 @@ jobs:
       - run: npm run lint
       - run: npm run build
 
-      - name: Perf Tests Setup
+      - name: Example Setup
         working-directory: ./example
-        run: npm install && npx playwright install && npm run dev &
+        run: npm install && npx playwright install
       - name: Perf Test Run
         working-directory: ./example
-        run: npm run test:perf
+        run: npm run test:perf:ci

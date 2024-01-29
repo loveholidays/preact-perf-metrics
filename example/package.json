@@ -5,7 +5,8 @@
 		"dev": "vite",
 		"build": "vite build",
 		"preview": "vite preview",
-		"test:perf": "playwright test"
+		"test:perf": "playwright test",
+		"test:perf:ci": "npx start-server-and-test dev http://localhost:5173/ test:perf"
 	},
 	"dependencies": {
 		"@loveholidays/preact-perf-metrics": "file:..",
@@ -15,6 +16,7 @@
 	},
 	"devDependencies": {
 		"@preact/preset-vite": "^2.5.0",
+		"start-server-and-test": "^2.0.3",
 		"vite": "^4.3.2"
 	}
 }
