@@ -1,5 +1,11 @@
 # @loveholidays/preact-perf-metrics
 
+## 0.8.1
+
+### Patch Changes
+
+- d536c23: fix npm permission
+
 ## 0.8.0
 
 ### Minor Changes
