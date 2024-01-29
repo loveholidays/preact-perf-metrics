@@ -2,14 +2,16 @@
   "name": "@loveholidays/preact-perf-metrics",
   "version": "0.6.0",
   "description": "Preact+Playwright performance test",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "types": "lib/esm/index.d.ts",
+  "files": [
+    "lib"
+  ],
   "exports": {
-    ".": "./lib/index.js",
-    "./setup": "./lib/setup.js"
+    ".": "./lib/cjs/index.js",
+    "./setup": "./lib/esm/setup.js"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig.cjs.json", 
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "tslint -p tsconfig.json",
     "format": "prettier --write \"src/**/*.ts\""

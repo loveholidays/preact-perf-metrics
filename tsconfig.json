@@ -1,9 +1,9 @@
 {
     "compilerOptions": {
       "target": "es2015",
-      "module": "esnext",
+      "module": "ESNext",
       "declaration": true,
-      "outDir": "./lib",
+      "outDir": "./lib/esm",
       "strict": true,
       "moduleResolution": "node",
     },
