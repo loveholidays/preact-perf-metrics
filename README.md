@@ -116,6 +116,7 @@ await expect(page).toPerform({ elementsRerendered: 1 });
 The parameter to assert is an array of strings, with the names of the preact-nodes involved:
 
 Example:
+
 ```js
 await reset();
 await page.locator('.counter').click();
@@ -123,9 +124,11 @@ await expect(page).toRerender(["MyCounterPage", "Button"]);
 ```
 
 
----
+--- 
+ 
+## Contributing
 
-
+Please see our [contributing guidelines](./CONTRIBUTING.md)
 
 --- 
 
