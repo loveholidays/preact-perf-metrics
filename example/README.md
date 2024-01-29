@@ -31,7 +31,7 @@ expect.extend(extension);
 ```
 
 > [!NOTE]
-> Note that this can also be done directly on the test file itself, in another file, etc (see [playwright-custom-matchers docs](https://playwright.dev/docs/test-assertions#add-custom-matchers-using-expectextend))
+> This can also be done on the test file itself or in another file (see [playwright-custom-matchers docs](https://playwright.dev/docs/test-assertions#add-custom-matchers-using-expectextend))
 
 #### 3- Playwright tests
 

@@ -12,7 +12,7 @@ This utility allows you to instrument you preact application bundle, and to writ
 
 Using this tool, you can ensure that the performance of your pages don't regress unintentionally. 
 
-Read the release blog post for more information.
+Read the [release blog post](https://loveholidays.com) and see the [/example](/example) for more information.
 
 <i>Made with ❤️ by loveholidays.com</i>
 
@@ -52,7 +52,7 @@ expect.extend(extension);
 ```
 
 > [!NOTE]
-> this can also be done directly on the test file itself, in another file, etc (see [playwright-custom-matchers docs](https://playwright.dev/docs/test-assertions#add-custom-matchers-using-expectextend))
+> This can also be done on the test file itself or in another file (see [playwright-custom-matchers docs](https://playwright.dev/docs/test-assertions#add-custom-matchers-using-expectextend))
 
 #### 4- Write tests
 
