@@ -18,13 +18,14 @@
     "type": "git",
     "url": "git+https://github.com/loveholidays/preact-perf-metrics.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Ivan Slobodiuk",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/loveholidays/preact-perf-metrics/issues"
   },
   "homepage": "https://github.com/loveholidays/preact-perf-metrics#readme",
   "devDependencies": {
+    "@changesets/cli": "^2.22.0",
     "@types/node": "^20.11.2",
     "prettier": "^2.8.4",
     "tslint": "^6.1.3",

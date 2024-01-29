@@ -125,6 +125,10 @@ await expect(page).toRerender(["MyCounterPage", "Button"]);
 
 ---
 
+
+
+--- 
+
 ## License
 
 MIT
