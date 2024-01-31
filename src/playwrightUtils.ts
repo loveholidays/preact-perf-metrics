@@ -2,15 +2,15 @@ import type { Page } from '@playwright/test';
 import { diff } from 'jest-diff';
 
 interface Counters {
-  elementsRendered: number;
+  nodesRendered: number;
   renderPhases: number;
-  elementsUnmounted: number;
+  nodesUnmounted: number;
 }
 
 interface PageCounters {
-  elementsRendered: string[],
+  nodesRendered: string[],
   renderPhases: string[],
-  elementsUnmounted: string[],
+  nodesUnmounted: string[],
 }
 
 const reset = async (page: Page) => {
@@ -18,9 +18,9 @@ const reset = async (page: Page) => {
   await page.evaluate(() => {
     const w = window as any;
     w.__PREACT_PERFMETRICS__ = {
-      elementsRendered: [],
+      nodesRendered: [],
       renderPhases: [],
-      elementsUnmounted: [],
+      nodesUnmounted: [],
       lastInteraction: performance.now(),
       waitForInteractionsFinished: () => {
         return new Promise<void>((resolve) => {
@@ -44,15 +44,15 @@ const settle = async (page: Page) => await page.evaluate('window.__PREACT_PERFME
 const equals = (a: any, b: any) => JSON.stringify(a) === JSON.stringify(b);
 
 const extension = {
-  async toRerenderElements(page: Page, expected: string[]) {
+  async toRerenderNodes(page: Page, expected: string[]) {
     if (!page.evaluate) {
-      throw Error("You need to call `toRerenderElements` from a playwright's `page` object");
+      throw Error("You need to call `toRerenderNodes` from a playwright's `page` object");
     }
     await settle(page);
 
     const pageCounters = await getPageCounters(page);
-    const pass =  equals(expected, pageCounters.elementsRendered);
-    const messageStr = diff(expected, pageCounters.elementsRendered);
+    const pass =  equals(expected, pageCounters.nodesRendered);
+    const messageStr = diff(expected, pageCounters.nodesRendered);
 
     return {
       message: () => messageStr,
@@ -88,7 +88,7 @@ declare global {
   export namespace PlaywrightTest {
     export interface Matchers<R, T = unknown> {
       toPerform: (expected: Partial<Counters>) => Promise<void>;
-      toRerenderElements: (rerender: string[]) => Promise<void>;
+      toRerenderNodes: (rerender: string[]) => Promise<void>;
     }
   }
 }
