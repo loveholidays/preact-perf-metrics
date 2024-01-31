@@ -1,5 +1,11 @@
 # @loveholidays/preact-perf-metrics
 
+## 0.9.0
+
+### Minor Changes
+
+- 5955555: rename elements* to nodes*
+
 ## 0.8.1
 
 ### Patch Changes
