@@ -12,7 +12,7 @@ This utility allows you to instrument you preact application bundle, and to writ
 
 Using this tool, you can ensure that the performance of your pages don't regress unintentionally. 
 
-Read the [release blog post](https://loveholidays.com) and see the [/example](/example) for more information.
+See the [/example](/example) for practical information.
 
 <i>Made with ❤️ by loveholidays.com</i>
 
@@ -38,7 +38,7 @@ setup();
 ```
 
 > [!NOTE]
-> you might want to call `setup()` only in a testing environment, not in the production build. 
+> you might want to call `setup()` only in a testing environment (and **not** in the production build) because the instrumentation adds some overhead.
 > Similarly to what you would do with `preact/debug` for the devtools.
 
 #### 3- Configure Playwright extension
@@ -72,7 +72,7 @@ test("...", await ({page}) => {
     await page.getByText('Button').click();
 
     // test: use of custom matcher `toPerform`
-    await expect(page).toPerform({ elementsRendered: 1, renderPhases: 1 });
+    await expect(page).toPerform({ nodesRendered: 1, renderPhases: 1 });
 })
 ```
 
@@ -96,9 +96,9 @@ The parameter to assert is an object with one or many of the following keys:
 
 ```js
 interface Counters {
-  elementsRendered?: number;
+  nodesRendered?: number;
   renderPhases?: number;
-  elementsUnmounted?: number;
+  nodesUnmmouted?: number;
 }
 ```
 
@@ -106,12 +106,12 @@ Example:
 ```js
 await reset();
 await page.locator('.counter').click();
-await expect(page).toPerform({ elementsRerendered: 1 });
+await expect(page).toPerform({ nodesRendered: 1 });
 ```
 
 ### `expect().toRerender(...)`
 
-[Playwright Custom matcher](https://playwright.dev/docs/test-assertions#add-custom-matchers-using-expectextend) to assert on the list of elements rerendered during an interaction.
+[Playwright Custom matcher](https://playwright.dev/docs/test-assertions#add-custom-matchers-using-expectextend) to assert on the list of nodes rendered during an interaction.
 
 The parameter to assert is an array of strings, with the names of the preact-nodes involved:
 

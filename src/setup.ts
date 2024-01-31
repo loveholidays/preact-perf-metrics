@@ -3,9 +3,9 @@ import { options, Fragment } from 'preact';
 const reset = () => {
   const w = window as any;
   w.__PREACT_PERFMETRICS__ = {
-    elementsRendered: [],
+    nodesRendered: [],
     renderPhases: [],
-    elementsUnmounted: [],
+    nodesUnmounted: [],
     lastInteraction: performance.now(),
     waitForInteractionsFinished: () => {
       return new Promise<void>((resolve: any) => {
@@ -46,7 +46,7 @@ const setup = () => {
 
   reset();
   o.__r = (vnode: any) => {
-    w.__PREACT_PERFMETRICS__.elementsRendered.push(displayName(vnode));
+    w.__PREACT_PERFMETRICS__.nodesRendered.push(displayName(vnode));
     w.__PREACT_PERFMETRICS__.lastInteraction = performance.now();
     render(vnode);
   };
@@ -57,7 +57,7 @@ const setup = () => {
   };
 
   o.unmount = (vnode: any) => {
-    w.__PREACT_PERFMETRICS__.elementsUnmounted.push(displayName(vnode));
+    w.__PREACT_PERFMETRICS__.nodesUnmounted.push(displayName(vnode));
     w.__PREACT_PERFMETRICS__.lastInteraction = performance.now();
     unmount(vnode);
   };
