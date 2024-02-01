@@ -8,9 +8,9 @@
 
 ## Overview
 
-This utility allows you to instrument you preact application bundle, and to write performance tests using [playwright](https://playwright.dev/) to assert on the framework activity (rerenders, unmountings, etc) during an interaction.
+This utility allows you to instrument your preact application bundle, and to write performance tests using [playwright](https://playwright.dev/) to assert on the framework activity (rerenders, unmountings, etc) during an interaction.
 
-Using this tool, you can ensure that the performance of your pages don't regress unintentionally. 
+Using this tool, you can ensure that the performance of your pages doesn't regress unintentionally. 
 
 See the [/example](/example) for practical information.
 
@@ -87,7 +87,7 @@ The API can be divided in two:
 Instruments the application to update the counters in `window.__PREACT_PERF_METRICS__` upon any preact internal activity (renders, unmounting, etc).
 
 ### `reset()`
-Playwright utility to resets all the counters (accummulators) to zero. Used to set the beginning of a measurement.
+Playwright utility to reset all the counters (accummulators) to zero. Used to set the beginning of a measurement.
 
 ### `expect().toPerform(...)`
 [Playwright Custom matcher](https://playwright.dev/docs/test-assertions#add-custom-matchers-using-expectextend) to assert on the framework activity during an interaction.
