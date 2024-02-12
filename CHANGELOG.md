@@ -1,5 +1,11 @@
 # @loveholidays/preact-perf-metrics
 
+## 0.9.1
+
+### Patch Changes
+
+- e0d1bf2: fix build steps
+
 ## 0.9.0
 
 ### Minor Changes
