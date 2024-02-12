@@ -57,6 +57,8 @@ jobs:
 
       - name: Commit version changes
         if: steps.changesets.outputs.HAS_CHANGESETS == 'true'
+        with:
+          token: ${{ secrets.LOVEHOLIDAYS_BUILD_PAT }}
         run: |
           git config --global user.name "build-loveholidays" && git config --global user.email "build@loveholidays.com"
           git diff && git add .
