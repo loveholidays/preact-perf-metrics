@@ -10,7 +10,7 @@
 
 This utility allows you to instrument your preact application bundle, and to write performance tests using [playwright](https://playwright.dev/) to assert on the framework activity (rerenders, unmountings, etc) during an interaction.
 
-Using this tool, you can ensure that the performance of your pages doesn't regress unintentionally. 
+Using this tool, you can ensure that performance doesn't regress unintentionally. 
 
 See the [/example](/example) for practical information.
 
