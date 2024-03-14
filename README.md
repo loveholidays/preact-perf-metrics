@@ -12,7 +12,7 @@ This utility allows you to instrument your preact application bundle, and to wri
 
 Using this tool, you can ensure that performance doesn't regress unintentionally. 
 
-See the [/example](/example) for practical information.
+Know the story behind the tool in our [blog post](https://tech.loveholidays.com/from-manual-grind-to-automated-bliss-introducing-preact-perf-metrics-d37ce188532b), and check the [/example](/example) for practical information.
 
 <i>Made with ❤️ by loveholidays.com</i>
 
