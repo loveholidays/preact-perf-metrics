@@ -34,7 +34,7 @@ export const ItemsList = ({ renderStrategy }) => {
             key={index}
             text={item}
             selected={index === selected}
-            as={(props) => <div {...props}>{props.children}</div>}
+            as={(props) => <div {...props}/>}
           />
         ))}
 
