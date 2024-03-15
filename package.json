@@ -1,6 +1,6 @@
 {
   "name": "@loveholidays/preact-perf-metrics",
-  "version": "0.9.1",
+  "version": "1.0.0",
   "description": "Preact+Playwright performance test",
   "types": "lib/esm/index.d.ts",
   "files": [

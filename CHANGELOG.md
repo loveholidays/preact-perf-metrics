@@ -1,5 +1,11 @@
 # @loveholidays/preact-perf-metrics
 
+## 1.0.0
+
+### Major Changes
+
+- 2382d3f: Release
+
 ## 0.9.1
 
 ### Patch Changes
