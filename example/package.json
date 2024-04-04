@@ -17,6 +17,6 @@
 	"devDependencies": {
 		"@preact/preset-vite": "^2.5.0",
 		"start-server-and-test": "^2.0.3",
-		"vite": "^4.3.2"
+		"vite": "^4.5.3"
 	}
 }
