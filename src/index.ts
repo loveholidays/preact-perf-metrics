@@ -1,4 +1,4 @@
-import { extension, counters, reset} from './playwrightUtils';
+import { counters, extension, reset } from './playwrightUtils';
 import { setup } from './setup';
 
 export { extension, counters, reset, setup };

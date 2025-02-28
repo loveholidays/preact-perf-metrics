@@ -9,9 +9,10 @@ We have a quick list of common questions to get you started engaging with this p
 
 ## The TLDR version
 
-1. Run `npm run changeset` before pushing your changes. This will launch an interactive CLI dialog where you can describe your changes to all the affected packages, and you can specify which version should be bumped (major / minor / patch).
-2. This will create a YAML file in this folder with the details you described. This file has a random generated name, so multiple YAML files can be stored here. Push this file to your branch.
-3. When we publish our changes from the `main` branch, Changesets aggregates all the YAML files in this repository and figures out what versions need to be bumped. For example, if there were 2 changes for `@loveholidays/phrasebook` where one of them is a breaking change (updating major) and one of them is a bugfix (updating patch), then it will just update the major as a result, and will include both changes in the changelog. It also publishes the new versions, updates the Github changelog and deletes these YAML files.
+1. Install `@changesets/cli` with `npm install -g @changesets/cli`
+2. Run `npx changeset` before pushing your changes. This will launch an interactive CLI dialog where you can describe your changes to all the affected packages, and you can specify which version should be bumped (major / minor / patch).
+3. This will create a YAML file in this folder with the details you described. This file has a random generated name, so multiple YAML files can be stored here. Push this file to your branch.
+4. When we publish our changes from the `main` branch, Changesets aggregates all the YAML files in this repository and figures out what versions need to be bumped. For example, if there were 2 changes for `@loveholidays/phrasebook` where one of them is a breaking change (updating major) and one of them is a bugfix (updating patch), then it will just update the major as a result, and will include both changes in the changelog. It also publishes the new versions, updates the Github changelog and deletes these YAML files.
 
 **Not every change requires a changeset!**
 
