@@ -8,9 +8,9 @@ interface Counters {
 }
 
 interface PageCounters {
-  nodesRendered: string[],
-  renderPhases: string[],
-  nodesUnmounted: string[],
+  nodesRendered: string[];
+  renderPhases: string[];
+  nodesUnmounted: string[];
 }
 
 const reset = async (page: Page) => {
@@ -31,17 +31,56 @@ const reset = async (page: Page) => {
               setTimeout(check, 500);
             }
           }
+
           check();
         });
-      }
+      },
     };
   });
 };
 
-const getPageCounters : (page: Page) => Promise<PageCounters> = (page) => page.evaluate('window.__PREACT_PERFMETRICS__');
+const getPageCounters: (page: Page) => Promise<PageCounters> = (page) => page.evaluate('window.__PREACT_PERFMETRICS__');
 const settle = async (page: Page) => await page.evaluate('window.__PREACT_PERFMETRICS__.waitForInteractionsFinished()');
 
 const equals = (a: any, b: any) => JSON.stringify(a) === JSON.stringify(b);
+
+const lessThanOrEqualTo = (a: Partial<Counters>, b: Counters): boolean => {
+  const keys = Object.keys(a) as (keyof Counters)[];
+
+  return keys.every((key) => {
+    const valA = a[key];
+    const valB = b[key];
+
+    if (!valA) {
+      return true;
+    }
+
+    return valB <= valA;
+  });
+};
+
+const perform = async (page: Page, expected: Partial<Counters>, predicate: (a: Partial<Counters>, b: Counters) => boolean) => {
+  if (!page.evaluate) {
+    throw Error("You need to call `toPerform` from a playwright's `page` object");
+  }
+  await settle(page);
+
+  const pageCounters = await getPageCounters(page);
+
+  // PageCounters to Counters, only with the keys we're testing for
+  const counters = Object.keys(expected).reduce((acc, key) => {
+    acc[key as keyof Counters] = pageCounters[key as keyof Counters].length;
+    return acc;
+  }, {} as Counters);
+
+  const pass = predicate(expected, counters);
+  const messageStr = diff(expected, counters);
+
+  return {
+    message: () => messageStr,
+    pass,
+  };
+};
 
 const extension = {
   async toRerenderNodes(page: Page, expected: string[]) {
@@ -51,7 +90,7 @@ const extension = {
     await settle(page);
 
     const pageCounters = await getPageCounters(page);
-    const pass =  equals(expected, pageCounters.nodesRendered);
+    const pass = equals(expected, pageCounters.nodesRendered);
     const messageStr = diff(expected, pageCounters.nodesRendered);
 
     return {
@@ -61,26 +100,11 @@ const extension = {
   },
 
   async toPerform(page: Page, expected: Partial<Counters>) {
-    if (!page.evaluate) {
-      throw Error("You need to call `toPerform` from a playwright's `page` object");
-    }
-    await settle(page);
+    return perform(page, expected, equals);
+  },
 
-    const pageCounters = await getPageCounters(page);
-
-    // PageCounters to Counters, only with the keys we're testing for
-    const counters = Object.keys(expected).reduce((acc, key) => { 
-      acc[key as keyof Counters] = pageCounters[key as keyof Counters].length; 
-      return acc }, {} as Counters
-    ); 
-
-    const pass = equals(expected, counters);
-    const messageStr = diff(expected, counters);
-
-    return {
-      message: () => messageStr,
-      pass,
-    };
+  async toPerformAtMost(page: Page, expected: Partial<Counters>) {
+    return perform(page, expected, lessThanOrEqualTo);
   },
 };
 
@@ -88,6 +112,7 @@ declare global {
   export namespace PlaywrightTest {
     export interface Matchers<R, T = unknown> {
       toPerform: (expected: Partial<Counters>) => Promise<void>;
+      toPerformAtMost: (expected: Partial<Counters>) => Promise<void>;
       toRerenderNodes: (rerender: string[]) => Promise<void>;
     }
   }

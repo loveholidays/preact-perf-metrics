@@ -62,7 +62,6 @@ test.describe('Counters', () => {
       await expect(page).toPerform({ nodesUnmounted: 2 });
     });
   });
-
   test.describe('Nodes Rerendered', () => {
     test('Counter-2 - Memoed Button + useCallback callback', async ({ page }) => {
       await page.goto(RUNNING_URL);
@@ -81,6 +80,31 @@ test.describe('Counters', () => {
       await page.getByText('Counter-1: 1').waitFor();
       await expect(page).toRerenderNodes(['Counter1', 'Memo(Button)', 'Button']);
       await expect(page).toPerform({ nodesRendered: 3, nodesUnmounted: 0, renderPhases: 1 });
+    });
+  });
+
+  test.describe('toPerformAtMost', () => {
+    test('Counter-3 -To perform at most', async ({page}) => {
+      await page.goto(RUNNING_URL);
+      await reset(page);
+      await page.getByText('Counter-1: 0').waitFor();
+      await page.getByRole('button', {name: 'Counter-1'}).click();
+      await page.getByText('Counter-1: 1').waitFor();
+      await expect(page).toPerformAtMost({nodesRendered: 4, renderPhases: 2, nodesUnmounted: 2});
+    });
+  });
+
+  test.describe('toPerformAtMost failure', () => {
+    test('Counter-3 - to fail when breaking limits', async ({ page }) => {
+      await page.goto(RUNNING_URL);
+      await reset(page);
+      await page.getByText('Counter-1: 0').waitFor();
+      await page.getByRole('button', { name: 'Counter-1' }).click();
+      await page.getByText('Counter-1: 1').waitFor();
+
+      await expect(page)
+          .not
+          .toPerformAtMost({ nodesRendered: 2, renderPhases: 0, nodesUnmounted: 0 })
     });
   });
 });
