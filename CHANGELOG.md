@@ -1,5 +1,11 @@
 # @loveholidays/preact-perf-metrics
 
+## 1.1.0
+
+### Minor Changes
+
+- dd61e64: Adding ToPerformAtMost Matcher and a minor refactor
+
 ## 1.0.0
 
 ### Major Changes
