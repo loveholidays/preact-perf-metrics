@@ -84,7 +84,7 @@ test.describe('Counters', () => {
   });
 
   test.describe('toPerformAtMost', () => {
-    test('Counter-3 -To perform at most', async ({page}) => {
+    test('Counter-3 - to perform at most', async ({page}) => {
       await page.goto(RUNNING_URL);
       await reset(page);
       await page.getByText('Counter-1: 0').waitFor();
