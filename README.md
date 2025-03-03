@@ -89,7 +89,7 @@ Instruments the application to update the counters in `window.__PREACT_PERF_METR
 ### `reset()`
 Playwright utility to reset all the counters (accummulators) to zero. Used to set the beginning of a measurement.
 
-### `expect().toPerform(...)`
+### `expect(...).toPerform(...)`
 [Playwright Custom matcher](https://playwright.dev/docs/test-assertions#add-custom-matchers-using-expectextend) to assert on the framework activity during an interaction.
 
 The parameter to assert is an object with one or many of the following keys:
@@ -109,7 +109,29 @@ await page.locator('.counter').click();
 await expect(page).toPerform({ nodesRendered: 1 });
 ```
 
-### `expect().toRerender(...)`
+### `expect(...).toPerformAtMost(...)`
+[Playwright Custom matcher](https://playwright.dev/docs/test-assertions#add-custom-matchers-using-expectextend) to assert on the max framework activity during an interaction.
+
+Framework activity Counter values will be expected to be less than or equal to the supplied Counter values given in a test.
+
+The parameter to assert is an object with one or many of the following keys:
+
+```js
+interface Counters {
+  nodesRendered?: number;
+  renderPhases?: number;
+  nodesUnmmouted?: number;
+}
+```
+
+Example:
+```js
+await reset();
+await page.locator('.counter').click();
+await expect(page).toPerformAtMost({ nodesRendered: 5 });
+```
+
+### `expect(...).toRerender(...)`
 
 [Playwright Custom matcher](https://playwright.dev/docs/test-assertions#add-custom-matchers-using-expectextend) to assert on the list of nodes rendered during an interaction.
 
